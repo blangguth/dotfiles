@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Load resources
+
+xrdb -merge .Xresources
+
+# Set up an icon tray
+stalonetray &
+
+# Fire up apps
+
+#xscreensaver -no-splash &
+
+if [ -x /usr/bin/nm-applet ] ; then
+   nm-applet --sm-disable &
+fi
+
+exec xmonad
+
+stalonetray -i 11 --window-type normal --geometry 6x1+1050 --window-strut none --background "#2d2d2d" --icon-gravity NE
+
+#STARTUP=x-window-manager

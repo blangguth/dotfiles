@@ -1,0 +1,20 @@
+Eighties Color list
+
+black0	= #2d2d2d
+
+grey0	= #393939
+grey1	= #515151
+grey2	= #747369
+grey3	= #a09f93
+grey5	= #d3d0c8
+grey6	= #e8e6df
+grey7	= #f2f0ec
+
+red	= #f2777a
+orange	= #f99157
+yellow	= #ffcc66
+green	= #99cc99
+cyan	= #66cccc
+blue	= #6699cc
+purple	= #cc99cc
+brown	= #d27b53

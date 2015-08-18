@@ -1,0 +1,9 @@
+#!/bin/sh
+# Script to launch dmenu with colors matching base16-eigthies theme
+# Author: Vic Fryzel
+# http://github.com/vicfryzel/xmonad-config
+# Modifier: Benjamin Langguth
+# http://github.com/blangguth/xmonad-config
+
+$(dmenu_path | yeganesh -- -fn 'xft:Inconsolata:pixelsize=11:anitalias=true' \
+  -nb '#2d2d2d' -nf '#f2f0ec' -sb '#66cccc' -sf '#2d2d2d')
