@@ -8,21 +8,19 @@
 ░░██████░░██████   ░░██   ░██  ░██ ███░░██████ ██████ 
  ░░░░░░  ░░░░░░     ░░    ░░   ░░ ░░░  ░░░░░░ ░░░░░░  
  
-  ▓▓▓▓▓▓▓▓▓▓
- ░▓ about  ▓ custom linux config files
- ░▓ author ▓ xero <x@xero.nu>
- ░▓ code   ▓ http://code.xero.nu/dotfiles
- ░▓ mirror ▓ http://git.io/.files
- ░▓▓▓▓▓▓▓▓▓▓
- ░░░░░░░░░░
+  ▓▓▓▓▓▓▓▓▓▓▓▓
+ ░▓ about    ▓ custom linux config files
+ ░▓ author   ▓ xero <x@xero.nu>
+ ░▓ modifier ▓ blangguth <ben.langguth@gmail.com>
+ ░▓ code     ▓ https://github.com/blangguth/dotfiles
+ ░▓▓▓▓▓▓▓▓▓▓▓▓
+ ░░░░░░░░░░░░
 
- awesome        > awesome wm config and ghost theme
  compton        > minimal composite config for opacity
  figlet         > custom 3d font
  fonts          > configs for gohu and other bitmap fonts
  fun            > term color, sys info, and other misc scripts
  git            > global git config and aliases
- herbstluftwm   > herbstluft wm config and greybeard theme
  irssi          > nixers irc theme
  mc             > midnight commander ui colors
  mpd            > music player daemon setup
@@ -41,6 +39,7 @@
  urxvt          > sourcerer terminal colors and keyboard settings
  vim            > wizard status bar and sourcerer color scheme
  wallpaper      > the cool desktop background images i use
+ xmonad         > xmonad wm config
  zsh            > zshell settings, aliases, and custom prompts
 ```
 
