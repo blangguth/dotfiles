@@ -13,7 +13,7 @@
 
 # background <color>         # color can be specified as an HTML hex triplet or
                              # as a name from rgb.txt, note that '#' must be quoted
-background "#111111"
+background "#2d2d2d"
 
 # decorations <decspec>      # set trays window decorations; possible values for
                              # decspec are: all, title, border, none
@@ -34,20 +34,20 @@ fuzzy_edges 0
 
 # geometry <geometry>        # tray's geometry in standard X notation; width and
                              # height are specified in slot_size multiples
-geometry 1x1+128
+geometry 4x1+1208
 
 # grow_gravity <gravity>     # one of N, S, E, W, NW, NE, SW, SE; tray will grow
                              # in the direction opposite to one specified by
 							 # grow_gravity; if horizontal or vertical
 							 # direction is not specified, tray will not grow in
 							 # that direction
-grow_gravity NW
+grow_gravity NE
 
 # icon_gravity <gravity>     # icon placement gravity, one of NW, NE, SW, SE
-icon_gravity NW
+icon_gravity NE
 
 # icon_size <int>            # specifies dimensions of typical icon slot
-icon_size 16
+icon_size 18
 
 # log_level <level>          # controls the amount of logging output, level can
                              # be err (default), info, or trace (enabled only
@@ -70,7 +70,7 @@ kludges force_icons_size
 
 # max_geometry <geometry>    # maximal tray dimensions; 0 in width/height means
                              # no limit
-max_geometry 0x0
+max_geometry 4x1
 
 # no_shrink [<bool>]         # disables shrink-back mode
 no_shrink false
@@ -127,12 +127,11 @@ window_layer normal
                              # windows); mode defines to which screen border tray
                              # will be attached; it can be either top, bottom,
                              # left, right, none or auto (default)
-window_strut auto
+window_strut None
 
 # window_type <type>         # set the EWMH-compatible window type; one of:
                              # desktop, dock, normal, toolbar, utility
-window_type dock
+window_type normal
 
 # xsync [<bool>]             # whether to operate on X server synchronously (SLOOOOW)
 xsync false
-
