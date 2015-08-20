@@ -9,5 +9,27 @@
 	last = log -1 --stat
 	unstage = reset HEAD --
 	cached = diff --cached
+    cm = commit -v -m
+    cma = commit -v -a -m
+    co = checkout
+    df = diff
+    dfc = diff --cached
+    br = branch
+    lg = log -p
+    rh = reset --hard
+    r1 = reset HEAD^
 [color]
-	ui = auto
+    ui = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
