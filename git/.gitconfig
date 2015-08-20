@@ -1,14 +1,14 @@
 [user]
-	name = blangguth 
-	email = ben.langguth@gmail.com
+    name = blangguth 
+    email = ben.langguth@gmail.com
 [credential]
-	helper = cache
+    helper = cache
 [alias]
-	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
-	stat = status -sb
-	last = log -1 --stat
-	unstage = reset HEAD --
-	cached = diff --cached
+    graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+    stat = status -sb
+    last = log -1 --stat
+    unstage = reset HEAD --
+    cached = diff --cached
     cm = commit -v -m
     cma = commit -v -a -m
     co = checkout
