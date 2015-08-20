@@ -7,7 +7,7 @@
  ############
  # about    # custom linux config files
  # author   # xero <x@xero.nu>
- # modifier # blangguth <ben.langguth@gmail.com>
+ # └─author # blangguth <ben.langguth@gmail.com>
  # code     # https://github.com/blangguth/dotfiles
  ############
 
