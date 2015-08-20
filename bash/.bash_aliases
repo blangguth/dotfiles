@@ -1,3 +1,14 @@
+#       ____   __   ____  _  _         __   __    __   __   ____  ____  ____ 
+#      (  _ \ / _\ / ___)/ )( \       / _\ (  )  (  ) / _\ / ___)(  __)/ ___)
+#    _  ) _ (/    \\___ \) __ ( ____ /    \/ (_/\ )( /    \\___ \ ) _) \___ \
+#   (_)(____/\_/\_/(____/\_)(_/(____)\_/\_/\____/(__)\_/\_/(____/(____)(____/
+#
+##########
+# about  # My bash aliases to ease the life
+# author # blangguth <ben.langguth@gmail.com>
+# code   # https://github.com/blangguth/dotfiles
+##########
+#
 # System aliases
 
 # enable color support of ls and also add handy aliases
