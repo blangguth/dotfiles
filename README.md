@@ -4,12 +4,12 @@
    ) D ((  O ) )(   ) _)  )( / (_/\ ) _) \___ \
   (____/ \__/ (__) (__)  (__)\____/(____)(____/
  
- ############
- # about    # custom linux config files
- # author   # xero <x@xero.nu>
- # └─author # blangguth <ben.langguth@gmail.com>
- # code     # https://github.com/blangguth/dotfiles
- ############
+ ###########
+ # about   # custom linux config files
+ # author  # xero <x@xero.nu>
+ # └author # blangguth <ben.langguth@gmail.com>
+ # code    # https://github.com/blangguth/dotfiles
+ ###########
 
  compton        > minimal composite config for opacity
  figlet         > custom 3d font
