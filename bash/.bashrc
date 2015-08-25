@@ -53,8 +53,8 @@ esac
 
 #Setting up the prompt with gitprompt
 source ~/.bash-git-prompt/prompt-colors.sh
-GIT_PROMPT_END_USER=" \n${Magenta}${USER}${ResetColor}@${Blue}${HOSTNAME%%.*}${ResetColor}${ResetColor} $ "
-GIT_PROMPT_END_ROOT=" \n${Red}${USER}${ResetColor}@${Blue}${HOSTNAME%%.*}${ResetColor}${ResetColor} $ "
+GIT_PROMPT_END_USER=" \n${Magenta}${USER}${ResetColor}@${Cyan}${HOSTNAME%%.*}${ResetColor}${ResetColor} $ "
+GIT_PROMPT_END_ROOT=" \n${Red}${USER}${ResetColor}@${Cyan}${HOSTNAME%%.*}${ResetColor}${ResetColor} $ "
 source ~/.bash-git-prompt/gitprompt.sh
 
 # If this is an xterm set the title to user@host:dir
