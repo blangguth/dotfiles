@@ -1,257 +1,196 @@
-"           ██
-"          ░░
-"  ██    ██ ██ ██████████  ██████  █████
-" ░██   ░██░██░░██░░██░░██░░██░░█ ██░░░██
-" ░░██ ░██ ░██ ░██ ░██ ░██ ░██ ░ ░██  ░░
-"  ░░████  ░██ ░██ ░██ ░██ ░██   ░██   ██
-"   ░░██   ░██ ███ ░██ ░██░███   ░░█████
-"    ░░    ░░ ░░░  ░░  ░░ ░░░     ░░░░░
+"      _  _  __  _  _  ____   ___ 
+"     / )( \(  )( \/ )(  _ \ / __)
+"    _\ \/ / )( / \/ \ )   /( (__ 
+"   (_)\__/ (__)\_)(_/(__\_) \___)
 "
-"  ▓▓▓▓▓▓▓▓▓▓
-" ░▓ author ▓ xero <x@xero.nu>
-" ░▓ code   ▓ http://code.xero.nu/dotfiles
-" ░▓ mirror ▓ http://git.io/.files
-" ░▓▓▓▓▓▓▓▓▓▓
-" ░░░░░░░░░░
+"##########
+"# about  # My .vimrc config
+"# author # blangguth <ben.langguth@gmail.com>
+"# code   # https://github.com/blangguth/dotfiles
+"##########
 "
-" use vim settings, rather than vi settings
-" must be first, because it changes other options as a side effect
-set nocompatible
+" Colors {{{
+syntax enable               " enable syntax processing
+"let g:base16_shell_path=/home/blangguth/code/base16/base16-builder/output/shell/
+"let base16colorspace="256"  " Access colors present in 256 colorspace
+set t_Co=256
+set background=dark
+"colorscheme base16-eighties
+colorscheme base16-eighties-dark " https://github.com/chriskempson/base16-vim -- fits my style
+" }}}
 
-" paste without auto indentation
-set paste
+" Spaces and Tabs {{{
+set tabstop=4               " number of visual spaces per TAB
+set softtabstop=4           " number of spaces in tab when editing
+set expandtab               " tabs are spaces
+" }}}
 
-" hide buffers, not close them
-set hidden
+" UI config {{{
+set number                  " show line numbers
+set showcmd                 " show command in bottom bar
+filetype indent on          " load filetype-specific indent files
+set wildmenu                " visual autocomplete for command menu
+set lazyredraw              " redraw only when we need to
+set showmatch               " highlight matching [{()}]
+set incsearch               " search as characters are entered
+set hlsearch                " highlight matches
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+" }}}
 
-" maintain undo history between sessions
-set undofile
-set undodir=~/.vim/undo
-set noswapfile
+" Folding {{{
+set foldenable              " enable folding
+set foldlevelstart=10       " open most folds by default
+set foldnestmax=10          " 10 nested fold max
+" space open/closes folds
+nnoremap <space> za
+set foldmethod=indent       " fold based on indent level
+" }}}
 
-" lazy file name tab completion
-set wildmode=longest,list,full
-set wildmenu
-set wildignorecase
+" Movement {{{
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+" highlight last inserted text
+nnoremap gV `[v`]
 
-" case insensitive search
-set ignorecase
-set smartcase
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
 
-" the /g flag on :s substitutions by default
-set gdefault
+" Toggle paste mode on and off
+map <leader>ü :setlocal paste!<cr>
 
-" make backspace behave in a sane manner
-set backspace=indent,eol,start
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+" Remember info about open buffers on close
+set viminfo^=%
+ 
+" }}}
 
-" searching
-set hlsearch
-set incsearch
+" Leader Shortcuts{{{
+let mapleader=","           " leader is comma
+" jk is escape
+inoremap jk <esc>
+" toggle gundo
+" nnoremap <leader>u :GundoToggle<CR>
+" Gundo requires Vim compiled with Python support - and for now I have no
+" idea how to achieve that.
 
-" use indents of 4 spaces
-set shiftwidth=2
+" save session
+nnoremap <leader>s :mksession<CR>
 
-" tabs are spaces, not tabs
-set expandtab
+" open ag.vim
+nnoremap <leader>a :Ag
 
-" an indentation every four columns
-set tabstop=2
+" open Unite
+nnoremap <leader>p :Unite file buffer<CR>
 
-" let backspace delete indent
-set softtabstop=2
+nnoremap <leader>n :NERDTreeToggle<CR>
 
-" remove trailing whitespaces and ^M chars
-autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+" }}}
 
-" let mapleader=","
-vnoremap <silent> <leader>y :w !xsel -i -b<CR>
-nnoremap <silent> <leader>y V:w !xsel -i -b<CR>
-nnoremap <silent> <leader>p :silent :r !xsel -o -b<CR>
+" Statusline {{{
+" Always show the status line
+set laststatus=2
+" Format the status line
+" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'murmur'
+" }}}
 
-" ┏━╸┏━┓┏┳┓┏┳┓┏━┓┏┓╻╺┳┓┏━┓
-" ┃  ┃ ┃┃┃┃┃┃┃┣━┫┃┗┫ ┃┃┗━┓
-" ┗━╸┗━┛╹ ╹╹ ╹╹ ╹╹ ╹╺┻┛┗━┛
-
-" make ; work like : for commands (lazy shifting)
-nnoremap ; :
-
-" json pretty print
-command J :%!python -mjson.tool
-
-" remove trailing white space
-command Nows :%s/\s\+$//
-
-" remove blank lines
-command Nobl :g/^\s*$/d
-
-" toggle spellcheck
-command Spell :setlocal spell! spell?
-
-" ╻┏┓╻╺┳╸┏━╸┏━┓┏━╸┏━┓┏━╸┏━╸
-" ┃┃┗┫ ┃ ┣╸ ┣┳┛┣╸ ┣━┫┃  ┣╸ 
-" ╹╹ ╹ ╹ ┗━╸╹┗╸╹  ╹ ╹┗━╸┗━╸
-
-" show matching brackets/parenthesis
-set showmatch
-
-" disable startup message
-set shortmess+=I
-
-" syntax highlighting and colors
-syntax on
-colorscheme sourcerer
-filetype off
-
-" stop unnecessary rendering
-set lazyredraw
-
-" show line numbers
-set number
-
-" no line wrapping
-set nowrap
-
-" no folding
-set foldlevel=99
-set foldminlines=99
-
-" don't wrap long lines
-set nowrap
-
-" highlight column
-set cursorcolumn
-
-" ┏━┓╻  ╻ ╻┏━╸╻┏┓╻   ┏━┓╺┳╸╻ ╻┏━╸┏━╸
-" ┣━┛┃  ┃ ┃┃╺┓┃┃┗┫   ┗━┓ ┃ ┃ ┃┣╸ ┣╸ 
-" ╹  ┗━╸┗━┛┗━┛╹╹ ╹   ┗━┛ ╹ ┗━┛╹  ╹  
-" i struggle with the decision to use plugins or a more vanilla vim. but right now i'm feeling sytanx completion, linting, and visual git diffs. don't judge me.
-" to install from the shell run:
-" git clone https://github.com/gmarik/Vundle.vim.git ~/dotfiles/vim/.vim/bundle/Vundle.vim && vim +BundleInstall +qall && PYTHON=/usr/bin/python2 ~/dotfiles/vim/.vim/bundle/YouCompleteMe/install.sh --clang-completer && pacman -S the_silver_searcher
-if 1 " boolean for plugin loading
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-  Plugin 'gmarik/Vundle.vim'
-  Plugin 'Valloric/YouCompleteMe'
-  Plugin 'scrooloose/syntastic'
-  Plugin 'airblade/vim-gitgutter'
-  Plugin 'isa/vim-matchit'
-  Plugin 'shawncplus/phpcomplete.vim'
-  Plugin 'mustache/vim-mustache-handlebars'
-  Plugin 'rking/ag.vim'
-  Plugin 'itchyny/lightline.vim'
-  Plugin 'tpope/vim-fugitive'
-  call vundle#end()
-  filetype plugin indent on
-
-  " syntatic http://git.io/syntastic.vim
-  " linters: (from aur) nodejs-jshint, nodejs-jsonlint, csslint, checkbashisms
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 0
-  highlight SyntasticErrorSign ctermfg=red ctermbg=237
-  highlight SyntasticWarningSign ctermfg=yellow ctermbg=237
-  highlight SyntasticStyleErrorSign ctermfg=red ctermbg=237
-  highlight SyntasticStyleWarningSign ctermfg=yellow ctermbg=237
-
-  " git-gutter http://git.io/vimgitgutter
-  let g:gitgutter_realtime = 1
-  let g:gitgutter_eager = 1
-  let g:gitgutter_diff_args = '-w'
-  let g:gitgutter_sign_added = '+'
-  let g:gitgutter_sign_modified = '~'
-  let g:gitgutter_sign_removed = '-'
-  let g:gitgutter_sign_removed_first_line = '^'
-  let g:gitgutter_sign_modified_removed = ':'
-  let g:gitgutter_max_signs = 1500
-  highlight clear SignColumn
-  highlight GitGutterAdd ctermfg=green ctermbg=237
-  highlight GitGutterChange ctermfg=yellow ctermbg=237
-  highlight GitGutterDelete ctermfg=red ctermbg=237
-  highlight GitGutterChangeDelete ctermfg=red ctermbg=237
-
-  " vim mustache http://git.io/vim-stash
-  let g:mustache_abbreviations = 1
-
-  " ag, the silver searcher http://git.io/AEu3dQ + http://git.io/d9N0MA
-  let g:agprg="ag -i --vimgrep"
-  let g:ag_highlight=1
-  " map \ to the ag command for quick searching
-  nnoremap \ :Ag<SPACE>
-
-  " ┏━┓╺┳╸┏━┓╺┳╸╻ ╻┏━┓╻  ╻┏┓╻┏━╸
-  " ┗━┓ ┃ ┣━┫ ┃ ┃ ┃┗━┓┃  ┃┃┗┫┣╸ 
-  " ┗━┛ ╹ ╹ ╹ ╹ ┗━┛┗━┛┗━╸╹╹ ╹┗━╸
-  " lightline http://git.io/lightline
-  " █▓▒░ wizard status line
-  set laststatus=2
-  let g:lightline = {
-    \ 'colorscheme': 'sourcerer',
-    \ 'active': {
-    \   'left': [ [ 'filename' ],
-    \             [ 'readonly', 'fugitive' ] ],
-    \   'right': [ [ 'percent', 'lineinfo' ],
-    \              [ 'fileencoding', 'filetype' ],
-    \              [ 'fileformat', 'syntastic' ] ]
-    \ },
-    \ 'component_function': {
-    \   'modified': 'WizMod',
-    \   'readonly': 'WizRO',
-    \   'fugitive': 'WizGit',
-    \   'filename': 'WizName',
-    \   'filetype': 'WizType',
-    \   'fileformat' : 'WizFormat',
-    \   'fileencoding': 'WizEncoding',
-    \   'mode': 'WizMode',
-    \ },
-    \ 'component_expand': {
-    \   'syntastic': 'SyntasticStatuslineFlag',
-    \ },
-    \ 'component_type': {
-    \   'syntastic': 'error',
-    \ },
-    \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
-    \ 'subseparator': { 'left': '▒', 'right': '░' }
-    \ }
-
-  function! WizMod()
-    return &ft =~ 'help\|vimfiler' ? '' : &modified ? '»' : &modifiable ? '' : ''
-  endfunction
-
-  function! WizRO()
-    return &ft !~? 'help\|vimfiler' && &readonly ? 'x' : ''
-  endfunction
-
-  function! WizGit()
-    if &ft !~? 'help\|vimfiler' && exists("*fugitive#head")
-      return fugitive#head()
-    endif
-    return ''
-  endfunction
-
-  function! WizName()
-    return ('' != WizMod() ? WizMod() . ' ' : '') .
-          \ ('' != expand('%:t') ? expand('%:t') : '[none]') 
-  endfunction
-
-  function! WizType()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : '') : ''
-  endfunction
-
-  function! WizFormat()
-    return ''
-  endfunction
-
-  function! WizEncoding()
-    return winwidth(0) > 70 ? (strlen(&fenc) ? &enc : &enc) : ''
-  endfunction
-
-  augroup AutoSyntastic
+" Autogroup {{{
+augroup configgroup
     autocmd!
-    autocmd BufWritePost *.c,*.cpp call s:syntastic()
-  augroup END
-  function! s:syntastic()
-    SyntasticCheck
-    call lightline#update()
-  endfunction
+    autocmd VimEnter * highlight clear SignColumn
+    autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md
+                \:call <SID>StripTrailingWhitespaces()
+    autocmd FileType java setlocal noexpandtab
+    autocmd FileType java setlocal list
+    autocmd FileType java setlocal listchars=tab:+\ ,eol:-
+    autocmd FileType java setlocal formatprg=par\ -w80\ -T4
+    autocmd FileType php setlocal expandtab
+    autocmd FileType php setlocal list
+    autocmd FileType php setlocal listchars=tab:+\ ,eol:-
+    autocmd FileType php setlocal formatprg=par\ -w80\ -T4
+    autocmd FileType ruby setlocal tabstop=2
+    autocmd FileType ruby setlocal shiftwidth=2
+    autocmd FileType ruby setlocal softtabstop=2
+    autocmd FileType ruby setlocal commentstring=#\ %s
+    autocmd FileType python setlocal commentstring=#\ %s
+    autocmd BufEnter *.cls setlocal filetype=java
+    autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+    autocmd BufEnter Makefile setlocal noexpandtab
+    autocmd BufEnter *.sh setlocal tabstop=2
+    autocmd BufEnter *.sh setlocal shiftwidth=2
+    autocmd BufEnter *.sh setlocal softtabstop=2
+augroup END
+" }}}
+
+" Backups {{{
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+" }}}
+
+" Custom Functions {{{
+" strips trailing whitespace at the end of files. this
+" is called on buffer write in the autogroup above.
+function! <SID>StripTrailingWhitespaces()
+    " save last search & cursor position
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    let @/=_s
+    call cursor(l, c)
+endfunction
+" }}}
+
+" Bundles {{{
+" Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
+
+if has('vim_starting')
+    if &compatible
+        set nocompatible    " Be iMproved
+    endif
+    " Required:
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+" bundles:
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'morhetz/gruvbox'
+" NeoBundle 'Gundo'
+NeoBundle 'rking/ag.vim'
+" NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'bling/vim-airline'
+
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+"}}}
