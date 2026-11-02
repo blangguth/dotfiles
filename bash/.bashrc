@@ -5,7 +5,7 @@
 #
 ##########
 # about  # My bash with my custom prompt incl. git stats
-# author # blangguth <ben.langguth@gmail.com>
+# author # blangguth <dev@langguth.io>
 # code   # https://github.com/blangguth/dotfiles
 ##########
 #
@@ -52,6 +52,7 @@ case "$TERM" in
 esac
 
 #Setting up the prompt with gitprompt
+#colors disabled for dracula theme
 source ~/.bash-git-prompt/prompt-colors.sh
 GIT_PROMPT_END_USER=" \n${Magenta}${USER}${ResetColor}@${Cyan}${HOSTNAME%%.*}${ResetColor}${ResetColor} $ "
 GIT_PROMPT_END_ROOT=" \n${Red}${USER}${ResetColor}@${Cyan}${HOSTNAME%%.*}${ResetColor}${ResetColor} $ "
@@ -81,10 +82,14 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Move everything
+shopt -s dotglob
+
 # PATH modifications
 export PATH=$PATH:~/.cabal/bin
 export PATH=$PATH:~/.xmonad/bin
 export PATH=$PATH:~/.npm/bin
+export PATH=$PATH:/usr/local/texlive/2021/bin/x86_64-linux
 
 # nodejs version manager
 export NVM_DIR="/home/blangguth/.nvm"
@@ -92,9 +97,26 @@ export NVM_DIR="/home/blangguth/.nvm"
 
 # jump around with z
 # https://github.com/rupa/z
-. /opt/z/z.sh
+#. /opt/z/z.sh
 
 # Base16 Shell
 # still working on it - having color issues in VIM's AirLine plugin
 #BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 #[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/i386-linux-gnu
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/i386-linux-gnu
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/libreoffice/program
+
+export DISPLAY=:0
+export PATH="$HOME/.local/bin:$PATH"
+
+# Verlauf: Zeitstempel, gross, sofort gespeichert
+export HISTTIMEFORMAT='%F %T  '
+HISTSIZE=100000
+HISTFILESIZE=200000
+shopt -s histappend
+PROMPT_COMMAND="history -a${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+
+# opencode
+export PATH=/home/blangguth/.opencode/bin:$PATH
