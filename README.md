@@ -50,6 +50,7 @@
  - [installing](#installing)
  - [how it works](#how-it-works)
  - [tl;dr](#tldr)
+ - [new machine](#new-machine)
  - [xmonad](#xmonad)
  - [vim](#vim)
 
@@ -88,6 +89,8 @@ use the `-t` (target) flag to link files somewhere else. **ryu-login** and **pac
 
 this applies here to `ssh`: `~/.ssh/config` is a real file on this machine and stays out of the repo, the repo copy is only a stub. also `~/.config/mc/menu` is a hand made link to `mc.menu`, `stow mc` would not create it.
 
+some programs write to linked files. mc rewrites `ini` when it exits, so a diff in that file is expected and doesn't need a commit. theme switchers can replace a gtk `settings.ini` with a real file, `ls -l` shows whether it's still a link.
+
 # tl;dr
 clone the repo into your home directory
 
@@ -110,6 +113,43 @@ install a package
 uninstall a package
 
 `stow -D vim`
+
+# new machine
+this repo only holds configs. a fresh debian install needs a few more things before the desktop works.
+
+**packages**
+
+`sudo apt-get install stow vim mc xmonad polybar rxvt-unicode suckless-tools feh scrot alsa-utils xbacklight x11-xserver-utils network-manager-applet keychain colordiff net-tools`
+
+stack builds xmonad against the x11 headers:
+
+`sudo apt-get install libx11-dev libxft-dev libxinerama-dev libxrandr-dev libxss-dev`
+
+**tools outside the package manager**
+
+- [stack](https://docs.haskellstack.org) and yeganesh in `~/.local/bin`
+- [nvm](https://github.com/nvm-sh/nvm) in `~/.nvm`, then `nvm alias default 26`
+- [rustup](https://rustup.rs) for `~/.cargo/env`
+- [homebrew](https://brew.sh) in `/home/linuxbrew/.linuxbrew`
+- the git prompt: `git clone https://github.com/blangguth/bash-git-prompt.git ~/.bash-git-prompt`
+
+`.bashrc` falls back to a plain prompt without bash-git-prompt and skips keychain, brew, nvm and `~/.cargo/env` when they're missing, `.profile` does the same for nvm and `~/.cargo/env`. keychain also needs `~/.ssh/id_rsa`.
+
+**theme, icons and fonts**
+
+- the [dracula gtk theme](https://draculatheme.com/gtk) in `~/.themes/Dracula`
+- the [tela icon theme](https://github.com/vinceliuice/Tela-icon-theme): run `./install.sh dracula` in a clone of it, then `gsettings set org.gnome.desktop.interface icon-theme Tela-dracula-dark`
+- fonts: SauceCodePro Nerd Font and DejaVu Sans Mono for urxvt, Inconsolata for Powerline and DejaVu Sans for polybar, Fira Code for dmenu
+
+**first start**
+
+`.xsessionrc` starts the xmonad binary directly, so build it before the first login and link it for `xmonad --restart`:
+
+`xmonad --recompile`
+
+`mkdir -p ~/.local/bin`
+
+`ln -s ~/.xmonad/xmonad-x86_64-linux ~/.local/bin/xmonad`
 
 # xmonad
 the config is `xmonad/.xmonad/xmonad.hs`, the mod key is super. it builds with [stack](https://docs.haskellstack.org) (ghc 9.4.7 from `lts-21.12`, xmonad 0.18.1 from hackage), so `stack.yaml` and `xmonad-config.cabal` have to stay next to it.
