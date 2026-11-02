@@ -1,0 +1,74 @@
+! Xcursor.theme: DMZ-white
+
+!-------------------------------------------------------------------------------
+! Xft settings
+!-------------------------------------------------------------------------------
+
+Xft.dpi:                    96
+Xft.antialias:              true
+Xft.rgba:                   rgb
+Xft.hinting:                true
+Xft.hintstyle:              hintslight
+
+!-------------------------------------------------------------------------------
+! URxvt settings
+!-------------------------------------------------------------------------------
+URxvt.termName: rxvt-unicode-256color
+!URxvt*termName:  rxvt-color
+urxvt*buffered: true
+!urxvt*font: xtf:SauceCodePro Nerd Font Medium:size=11.5
+urxvt*font: xft:SauceCodePro Nerd Font Mono:style=Medium:size=11.5,xft:DejaVu Sans Mono:size=11.5
+urxvt*depth: 32
+urxvt*loginShell: true
+urxvt*saveLines: 4095
+urxvt*transparent: true
+URxvt*shading: 20
+
+! links
+urxvt.perl-ext-common: default,matcher
+urxvt.urlLauncher: firefox 
+urxvt.matcher.button: 1
+
+! borders
+!URxvt*borderless: 1
+urxvt.internalBorder: 3
+
+! scrolling
+urxvt*scrollBar: false
+! Enable Shift-PageUp/Down in screen
+urxvt*secondaryScroll: true
+
+! Fix font spacing
+urxvt*letterSpace: -1
+urxvt.lineSpace: 0
+
+
+! fading
+*fading: 40 
+*fadeColor: #4C566A
+
+! Dracula
+*.background: #282a36
+*.foreground: #f8f8f2
+*.color0:  #21222c
+*.color8:  #6272a4
+*.color1:  #ff5555
+*.color9:  #ff6e6e
+*.color2:  #50fa7b
+*.color10: #69ff94
+*.color3:  #f1fa8c
+*.color11: #ffffa5
+*.color4:  #bd93f9
+*.color12: #d6acff
+*.color5:  #ff79c6
+*.color13: #ff92df
+*.color6:  #8be9fd
+*.color14: #a4ffff
+*.color7:  #f8f8f2
+*.color15: #ffffff
+
+! Cursor
+urxvt.cursorBlink: true
+urxvt.cursorColor: #50fa7b
+urxvt.cursorUnderline: false
+urxvt.underlineColor: #BD93F9
