@@ -18,8 +18,10 @@
  git            > global git config and aliases
  mc             > midnight commander settings, panels and user menu
  polybar        > status bar config
+ urxvt          > terminal settings, xft and dracula colors in .Xresources
  vim            > neobundle plugins and dracula color scheme
  xmonad         > xmonad wm config, helper scripts and stack build files
+ xsession       > .xsessionrc, starts polybar, urxvtd and xmonad
 
  not in use on this machine (mostly inherited from xero)
  -------------------------------------------------------
@@ -52,7 +54,6 @@
  - [installing](#installing)
  - [how it works](#how-it-works)
  - [tl;dr](#tldr)
- - [not in this repo](#not-in-this-repo)
  - [xmonad](#xmonad)
  - [vim](#vim)
 
@@ -113,12 +114,6 @@ install a package
 uninstall a package
 
 `stow -D vim`
-
-# not in this repo
-these parts of the desktop are not managed here yet:
-
-- `~/.xsessionrc` starts the session, including polybar, urxvtd and xmonad
-- `~/.Xresources` holds the urxvt settings and colors
 
 # xmonad
 the config is `xmonad/.xmonad/xmonad.hs`, the mod key is super. it builds with [stack](https://docs.haskellstack.org) (ghc 9.4.7 from `lts-21.12`, xmonad 0.18.1 from hackage), so `stack.yaml` and `xmonad-config.cabal` have to stay next to it.
