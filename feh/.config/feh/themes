@@ -1,0 +1,14 @@
+feh --scale-down \
+    --image-bg black \
+    --sort name \
+    --no-menus \
+    --magick-timeout -1 \
+    --force-aliasing \
+    --title "[%u/%l] %n (%wx%h)"
+
+thumbs --sort name \
+    --image-bg black \
+    --thumbnails \
+    --thumb-width 320 \
+    --thumb-height 240 \
+    --limit-width 1920
