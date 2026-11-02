@@ -1,6 +1,6 @@
 [user]
-    name = blangguth 
-    email = ben.langguth@gmail.com
+	name = blangguth
+	email = dev@langguth.io
 [credential]
     helper = cache
 [alias]
@@ -33,3 +33,9 @@
     added = yellow
     changed = green
     untracked = cyan
+[credential "https://github.com"]
+	helper = 
+	helper = !/home/blangguth/.local/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/home/blangguth/.local/bin/gh auth git-credential
