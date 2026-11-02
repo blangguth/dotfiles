@@ -16,7 +16,7 @@
  bash           > .bashrc with git prompt, and aliases
  feh            > image viewer themes
  git            > global git config and aliases
- mc             > midnight commander settings, panels and user menu
+ mc             > midnight commander settings, panels, user menu and dracula skin
  polybar        > status bar config
  urxvt          > terminal settings, xft and dracula colors in .Xresources
  vim            > neobundle plugins and dracula color scheme
