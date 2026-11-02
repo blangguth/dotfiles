@@ -5,3 +5,6 @@ xmonad.o
 .stack-work/
 build-x86_64-linux/
 dist-newstyle/
+xmonad-i386-linux
+yeganesh
+yeganesh-strip
