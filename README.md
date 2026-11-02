@@ -90,7 +90,7 @@ use the `-t` (target) flag to link files somewhere else. **ryu-login** and **pac
 
 **note:** stow will not replace a real file. if a file already exists in the target location stow refuses to link it. move the file out of the way first, and compare it with the repo copy before you do. don't use `--adopt`, it overwrites the repo copy with the file from your home directory.
 
-this applies here to `mc` and `ssh`: `~/.config/mc/ini` and `~/.ssh/config` are real files on this machine, and the repo copies differ from them. also `~/.config/mc/menu` is a hand made link to `mc.menu`, `stow mc` would not create it.
+this applies here to `ssh`: `~/.ssh/config` is a real file on this machine and stays out of the repo, the repo copy is only a stub. also `~/.config/mc/menu` is a hand made link to `mc.menu`, `stow mc` would not create it.
 
 # tl;dr
 clone the repo into your home directory
