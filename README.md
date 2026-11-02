@@ -17,6 +17,7 @@
  feh            > image viewer themes
  git            > global git config and aliases
  mc             > midnight commander settings, panels and user menu
+ polybar        > status bar config
  vim            > neobundle plugins and dracula color scheme
  xmonad         > xmonad wm config, helper scripts and stack build files
 
@@ -118,7 +119,6 @@ these parts of the desktop are not managed here yet:
 
 - `~/.xsessionrc` starts the session, including polybar, urxvtd and xmonad
 - `~/.Xresources` holds the urxvt settings and colors
-- `~/.config/polybar/config.ini` is the polybar config
 
 # xmonad
 the config is `xmonad/.xmonad/xmonad.hs`, the mod key is super. it builds with [stack](https://docs.haskellstack.org) (ghc 9.4.7 from `lts-21.12`, xmonad 0.18.1 from hackage), so `stack.yaml` and `xmonad-config.cabal` have to stay next to it.
