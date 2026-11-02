@@ -69,9 +69,6 @@ alias record="ffmpeg -f x11grab -s 1366x768 -an -r 16 -loglevel quiet -i :0.0 -b
 tmx() {
   [[ $# -eq 0 ]] && bash ~/code/sys/tmx 0 || bash ~/code/sys/tmx $#
 }
-email() {
-	echo $3 | mutt -s $2 $1
-}
 pcat() {
 	pygmentize -f terminal256 -O style=monokai -g
 }
