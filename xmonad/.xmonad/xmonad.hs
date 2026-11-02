@@ -4,11 +4,9 @@
 -- Modifier: Benjamin Langguth
 -- http://github.com/blangguth/dotfiles/xmonad
 
-import System.IO
 import System.Exit
 import XMonad
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageDocks(ToggleStruts(..),avoidStruts,docks,manageDocks)
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.Fullscreen
@@ -16,7 +14,6 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
-import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Actions.CycleWS
@@ -36,7 +33,7 @@ myTerminal = "/usr/bin/urxvtcd"
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = ["1:term","2:web","3:code","4:chat","5:vm","6:office","7:media"] ++ map show [8..9]
+myWorkspaces = ["1:term","2:web","3:chat","4:vm","5:office","6:media"] ++ map show [7..9]
 
 ------------------------------------------------------------------------
 -- Window rules
@@ -55,35 +52,28 @@ myWorkspaces = ["1:term","2:web","3:code","4:chat","5:vm","6:office","7:media"] 
 myManageHook = composeAll
     [ resource  =? "desktop_window"         --> doIgnore
     , className =? "Galculator"             --> doFloat
-    , className =? "Steam"                  --> doFloat
 --  , className =? "Gimp"                   --> doFloat -- mouse pointer is gone -.-
     , resource  =? "gpicview"               --> doFloat
     , className =? "MPlayer"                --> doFloat
-
+    , className =? "zoom"                   --> doFloat
     , className =? "Chromium"               --> doShift "2:web"
     , className =? "Google-chrome"          --> doShift "2:web"
     , className =? "Iceweasel"              --> doShift "2:web"
     , className =? "Firefox"                --> doShift "2:web"
+    , className =? "Weechat"                --> doShift "3:chat"
+    , className =? "Skype"                  --> doShift "3:chat"
+    , className =? "VirtualBox"             --> doShift "4:vm"
+    , className =? "Simple-scan"            --> doShift "5:office"
+    , className =? "Gimp"                   --> doShift "6:media"
+    , className =? "Vlc"                    --> doShift "6:media"
+    , className =? "Digikam"                --> doShift "6:media"
+    , className =? "Darktable"              --> doShift "6:media"
+    , className =? "Rapid-photo-downloader" --> doShift "6:media"
+    , className =? "feh"                    --> doCenterFloat
 
-    , className =? "Atom"                   --> doShift "3:code"
-    , className =? "Emacs"                  --> doShift "3:code"
+    , className =? "stalonetray"            --> doIgnore]
 
-    , className =? "Weechat"                --> doShift "4:chat"
-    , className =? "Skype"                  --> doShift "4:chat"
-
-    , className =? "VirtualBox"             --> doShift "5:vm"
-
-    , className =? "Simple-scan"            --> doShift "6:office"
-
-    , className =? "Gimp"                   --> doShift "7:media"
-    , className =? "Vlc"                    --> doShift "7:media"
-    , className =? "Digikam"                --> doShift "7:media"
-    , className =? "Darktable"              --> doShift "7:media"
-    , className =? "Rapid-photo-downloader" --> doShift "7:media"
-
-    , className =? "stalonetray"            --> doIgnore
-
-    , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
+    --, isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
 ------------------------------------------------------------------------
 -- Layouts
@@ -99,31 +89,24 @@ myLayout = avoidStruts (
     Tall 1 (3/100) (1/2) |||
     Mirror (Tall 1 (3/100) (1/2)) |||
     tabbed shrinkText tabConfig |||
-    Full |||
     spiral (6/7)) |||
+--    ThreeCol 1 (3/100) (1/2) |||
     noBorders (fullscreenFull Full)
-
 ------------------------------------------------------------------------
 -- Colors and borders
 --
-myNormalBorderColor  = "#515151"
-myFocusedBorderColor = "#66cccc"
+myNormalBorderColor  = "#44475A"
+myFocusedBorderColor = "#BD93F9"
 
 -- Colors for text and backgrounds of each tab when in "Tabbed" layout.
-tabConfig = defaultTheme {
-    activeBorderColor = "#66cccc",
-    activeTextColor = "#66cccc",
-    activeColor = "#2d2d2d",
-    inactiveBorderColor = "#a09f93",
-    inactiveTextColor = "#a09f93",
-    inactiveColor = "#2d2d2d"
+tabConfig = def {
+    activeBorderColor = "#BD93F9",
+    activeTextColor = "#FF79C6",
+    activeColor = "#282A36",
+    inactiveBorderColor = "#44475A",
+    inactiveTextColor = "#44475A",
+    inactiveColor = "#44475A"
 }
-
--- Color of current window title in xmobar.
-xmobarTitleColor = "#66cccc"
-
--- Color of current workspace in xmobar.
-xmobarCurrentWorkspaceColor = "#cc99cc"
 
 -- Width of the window border in pixels.
 myBorderWidth = 2
@@ -153,7 +136,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask, xK_Right), nextWS)
 
   -- Lock the screen using slock.
-  , ((modMask .|. controlMask, xK_l),
+  , ((modMask .|. shiftMask, xK_l),
      spawn "slock")
 
   -- Launch dmenu via yeganesh.
@@ -172,30 +155,35 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask .|. controlMask .|. shiftMask, xK_p),
      spawn "screenshot")
 
-  -- Fetch a single use password.
-  , ((modMask .|. shiftMask, xK_o),
-     spawn "fetchotp -x")
+  -- Multi monitor handling.
+  , ((mod4Mask, xK_o), nextScreen)
+  , ((mod4Mask .|. shiftMask, xK_o), shiftNextScreen)
+  , ((mod4Mask .|. mod1Mask, xK_o), swapNextScreen)
 
   -- Mute volume.
-  , ((modMask, xK_F2),
+  , ((modMask, xK_F4),
+-- #todo: Toggle set auch headphone auf mute, aber nicht wieder an.
      spawn "amixer set Master toggle")
 
   -- Decrease volume.
-  , ((modMask, xK_F3),
+  , ((modMask, xK_F2),
      spawn "amixer -q set Master on && amixer -q set Master 5%-")
+  , ((modMask, xF86XK_AudioLowerVolume),
+        spawn "amixer -q set Master on && amixer -q set Master 5%-")
 
   -- Increase volume.
-  , ((modMask, xK_F4),
+  , ((modMask, xK_F3),
+     spawn "amixer -q set Master on && amixer -q set Master 5%+")
+  , ((modMask, xF86XK_AudioRaiseVolume),
      spawn "amixer -q set Master on && amixer -q set Master 5%+")
 
-  -- Descrese brightness
-  , ((modMask, xK_F5),
-     spawn "xbacklight -20")
+  -- Decrease brightness
+  , ((0, xF86XK_MonBrightnessDown),
+     spawn "xbacklight -dec 10")
 
   -- Increase brightness
-  , ((modMask, xK_F6),
-     spawn "xbacklight +30")
-
+  , ((0, xF86XK_MonBrightnessUp),
+     spawn "xbacklight -inc 10")
   -- Audio previous.
 --  , ((0, 0x1008FF16),
 --     spawn "")
@@ -347,19 +335,10 @@ myStartupHook = return ()
 -- Run xmonad with all the defaults we set up.
 --
 main = do
-  xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
-  xmonad $ defaults {
-      logHook = dynamicLogWithPP $ xmobarPP {
-            ppOutput = hPutStrLn xmproc
-          , ppTitle = xmobarColor xmobarTitleColor "" . shorten 100
-          , ppCurrent = xmobarColor xmobarCurrentWorkspaceColor ""
-          , ppSep = "   "
-      }
-      , manageHook = manageDocks <+> myManageHook
-      , startupHook = setWMName "LG3D"
-  }
-
-
+  xmonad $ docks defaults {
+    manageHook = manageDocks <+> myManageHook
+    , startupHook = setWMName "LG3D"
+}
 ------------------------------------------------------------------------
 -- Combine it all together
 -- A structure containing your configuration settings, overriding
@@ -368,7 +347,7 @@ main = do
 --
 -- No need to modify this.
 --
-defaults = defaultConfig {
+defaults = def {
     -- simple stuff
     terminal           = myTerminal,
     focusFollowsMouse  = myFocusFollowsMouse,
@@ -383,7 +362,7 @@ defaults = defaultConfig {
     mouseBindings      = myMouseBindings,
 
     -- hooks, layouts
-    layoutHook         = smartBorders myLayout,
+    layoutHook         = myLayout,
     manageHook         = myManageHook,
     startupHook        = myStartupHook
 }
