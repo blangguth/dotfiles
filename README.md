@@ -25,17 +25,12 @@
 
  not in use on this machine (mostly inherited from xero)
  -------------------------------------------------------
- compton        > minimal composite config for opacity
  fonts          > configs for gohu and other bitmap fonts
  fun            > term color, sys info, and other misc scripts
- interrobang    > tiny launcher menu config
- mpd            > music player daemon setup
- ncmpcpp        > ncurses mpc++ ui/color settings
  pacman         > pacman colors and progress bar animations (arch only)
  ranger         > file manager with image previews and z3bra theme
  ryu-login      > ryu ansi art for /etc/issue tty login
  ssh            > remote ssh server keep alive
- stalonetray    > stand alone tray, replaced by the polybar tray
  sys            > system automation scripts
  themes         > mod of the cathexis dark theme for gtk/qt/xfce
  tmux           > terminal multiplexer with custom status bar
