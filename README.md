@@ -139,7 +139,7 @@ stack builds xmonad against the x11 headers:
 
 - the [dracula gtk theme](https://draculatheme.com/gtk) in `~/.themes/Dracula`
 - the [tela icon theme](https://github.com/vinceliuice/Tela-icon-theme): run `./install.sh dracula` in a clone of it, then `gsettings set org.gnome.desktop.interface icon-theme Tela-dracula-dark`
-- fonts: SauceCodePro Nerd Font and DejaVu Sans Mono for urxvt, Inconsolata for Powerline and DejaVu Sans for polybar, Fira Code for dmenu
+- fonts: SauceCodePro Nerd Font for urxvt, polybar and dmenu, with DejaVu Sans Mono and DejaVu Sans as fallbacks, Noto Sans for gtk
 
 **first start**
 
