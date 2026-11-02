@@ -5,7 +5,7 @@
 #
 ##########
 # about  # My bash aliases to ease the life
-# author # blangguth <ben.langguth@gmail.com>
+# author # blangguth <dev@langguth.io>
 # code   # https://github.com/blangguth/dotfiles
 ##########
 #
@@ -24,18 +24,16 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -laF'
+alias ll='ls -laFh'
 alias la='ls -A'
 alias l='ls -CF'
 
 # jump around
-alias ..='cd ..'
-
 ## a quick way to get out of current directory ##
 alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
-alias .....='cd ../../../../'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 
@@ -48,14 +46,14 @@ alias j='jobs -l'
 alias sha1='openssl sha1'
 
 # Do not wait interval 1 second, go fast #
-alias fastping='ping -c 100 -s.2'
+alias fastping='ping -c 100 -i.2'
 
 # Use netstat command to quickly list all TCP/UDP port on the server:
 alias ports='netstat -tulanp'
 
 # Add safety nets
-## do not delete / or prompt if deleting more than 3 files at a time
-alias rm='rm -I --preserve-root'
+## do not delete / and ask before every file
+alias rm='rm -i --preserve-root'
  
 ## confirmation
 alias mv='mv -i'
@@ -114,6 +112,3 @@ alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 
 # resume wgets
 alias wget='wget -c'
-
-# safer rm
-alias rm='rm -i'
