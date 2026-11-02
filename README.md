@@ -13,15 +13,16 @@
 
  in use
  ------
- bash           > .bashrc with git prompt, and aliases
+ bash           > .bashrc with git prompt, .profile and aliases
  feh            > image viewer themes
  git            > global git config and aliases
+ gtk            > gtk 2, 3 and 4 theme, icon and font settings
  mc             > midnight commander settings, panels, user menu and dracula skin
  polybar        > status bar config
  urxvt          > terminal settings, xft and dracula colors in .Xresources
  vim            > neobundle plugins and dracula color scheme
  xmonad         > xmonad wm config, helper scripts and stack build files
- xsession       > .xsessionrc, starts polybar, urxvtd and xmonad
+ xsession       > .xsessionrc starts polybar, urxvtd and xmonad, .xserverrc
 
  not in use on this machine (mostly inherited from xero)
  -------------------------------------------------------
