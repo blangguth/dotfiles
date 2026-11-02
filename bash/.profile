@@ -20,9 +20,13 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-if [ -d "$HOME:/.local/bin" ] ; then
+if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-source ~/.nvm/nvm.sh
-. "$HOME/.cargo/env"
+if [ -s "$HOME/.nvm/nvm.sh" ] ; then
+    . "$HOME/.nvm/nvm.sh"
+fi
+if [ -f "$HOME/.cargo/env" ] ; then
+    . "$HOME/.cargo/env"
+fi

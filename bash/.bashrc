@@ -164,10 +164,18 @@ export NVM_DIR="$HOME/.nvm"
 # jump around with z: https://github.com/rupa/z
 #[ -f /opt/z/z.sh ] && . /opt/z/z.sh
 
-eval $(keychain --eval --quiet id_rsa)
+# ssh agent
+if command -v keychain >/dev/null 2>&1 && [ -f "$HOME/.ssh/id_rsa" ]; then
+    eval "$(keychain --eval --quiet id_rsa)"
+fi
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-. "$HOME/.cargo/env"
+# homebrew
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+fi
+
+# rust
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
