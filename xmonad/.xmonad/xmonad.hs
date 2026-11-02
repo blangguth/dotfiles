@@ -164,17 +164,19 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask, xK_F4),
 -- #todo: Toggle set auch headphone auf mute, aber nicht wieder an.
      spawn "amixer set Master toggle")
+  , ((0, xF86XK_AudioMute),
+     spawn "amixer set Master toggle")
 
   -- Decrease volume.
   , ((modMask, xK_F2),
      spawn "amixer -q set Master on && amixer -q set Master 5%-")
-  , ((modMask, xF86XK_AudioLowerVolume),
+  , ((0, xF86XK_AudioLowerVolume),
         spawn "amixer -q set Master on && amixer -q set Master 5%-")
 
   -- Increase volume.
   , ((modMask, xK_F3),
      spawn "amixer -q set Master on && amixer -q set Master 5%+")
-  , ((modMask, xF86XK_AudioRaiseVolume),
+  , ((0, xF86XK_AudioRaiseVolume),
      spawn "amixer -q set Master on && amixer -q set Master 5%+")
 
   -- Decrease brightness

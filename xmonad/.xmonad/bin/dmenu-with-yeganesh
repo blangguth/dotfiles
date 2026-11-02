@@ -5,5 +5,5 @@
 # Modifier: Benjamin Langguth
 # http://github.com/blangguth/xmonad-config
 
-$(dmenu_path | yeganesh -- -fn 'xft:Fira Code:pixelsize=11:antialias=true' \
+$(dmenu_path | yeganesh -- -fn 'Fira Code:pixelsize=11:antialias=true' \
   -nb '#2d2d2d' -nf '#f2f0ec' -sb '#66cccc' -sf '#2d2d2d')
