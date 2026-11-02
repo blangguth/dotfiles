@@ -5,19 +5,15 @@
 "
 "##########
 "# about  # My .vimrc config
-"# author # blangguth <ben.langguth@gmail.com>
+"# author # blangguth <dev@langguth.io>
 "# code   # https://github.com/blangguth/dotfiles
 "##########
 "
 " Colors {{{
 syntax enable               " enable syntax processing
-"let g:base16_shell_path=/home/blangguth/code/base16/base16-builder/output/shell/
-"let base16colorspace="256"  " Access colors present in 256 colorspace
 set t_Co=256
 set background=dark
-"colorscheme base16-eighties
-colorscheme base16-eighties-dark " https://github.com/chriskempson/base16-vim -- fits my style
-" }}}
+"}}}
 
 " Spaces and Tabs {{{
 set tabstop=4               " number of visual spaces per TAB
@@ -101,7 +97,7 @@ set laststatus=2
 " Format the status line
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'murmur'
+let g:airline_theme = 'dracula'
 " }}}
 
 " Autogroup {{{
@@ -180,6 +176,7 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'dracula/vim'
 
 " My Bundles here:
 " Refer to |:NeoBundle-examples|.
@@ -192,5 +189,9 @@ filetype plugin indent on
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
+
+let g:dracula_italic = 0
+:let g:dracula_colorterm = 0
+colorscheme dracula
 
 "}}}
