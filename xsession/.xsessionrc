@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Set background image with feh
+#feh --bg-scale ~/pictures/debian-gray-red.jpg &
+
+# merge custom x resources
+xrdb -merge "${HOME}/.Xresources" &
+
+# start the terminal emulator daemon
+urxvtd -q -f -o &
+
+# Set up an icon tray
+#stalonetray &
+polybar mybar &
+
+
+# Fire up apps
+
+#xscreensaver -no-splash &
+
+if [ -x /usr/bin/nm-applet ] ; then
+   nm-applet --sm-disable &
+fi
+
+# The following needs to be uncommented if Xresources => Xdefaults is wanted?!
+#Xdefaults
+
+#exec xmonad
+exec $HOME/.xmonad/xmonad-x86_64-linux 
+#exec xfce4-session
