@@ -6,6 +6,7 @@
 
 import System.Exit
 import XMonad
+import XMonad.Hooks.EwmhDesktops(ewmh)
 import XMonad.Hooks.ManageDocks(ToggleStruts(..),avoidStruts,docks,manageDocks)
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.Rescreen(addAfterRescreenHook)
@@ -355,7 +356,7 @@ startBars = do
 -- Run xmonad with all the defaults we set up.
 --
 main = do
-  xmonad $ addAfterRescreenHook startBars $ docks defaults {
+  xmonad $ ewmh $ addAfterRescreenHook startBars $ docks defaults {
     manageHook = manageDocks <+> myManageHook
     , startupHook = setWMName "LG3D" >> startBars
 }
