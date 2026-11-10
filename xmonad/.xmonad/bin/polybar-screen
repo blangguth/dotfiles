@@ -1,0 +1,12 @@
+#!/bin/sh
+# Start polybar on xmonad screen $1, called by xmonad (startBars in xmonad.hs).
+# xrandr lists the monitors in the same order xmonad numbers its screens.
+
+screen=$1
+monitor=$(xrandr --listactivemonitors | awk -v n="$screen:" '$1 == n { gsub(/[+*]/, "", $2); print $2 }')
+[ -n "$monitor" ] || exit 1
+
+bar=mybar-secondary
+[ "$screen" -eq 0 ] && bar=mybar
+
+MONITOR=$monitor exec polybar "$bar"

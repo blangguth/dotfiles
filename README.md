@@ -22,7 +22,7 @@
  urxvt          > terminal settings, xft and dracula colors in .Xresources
  vim            > neobundle plugins and dracula color scheme
  xmonad         > xmonad wm config, helper scripts and stack build files
- xsession       > .xsessionrc starts polybar, urxvtd and xmonad, .xserverrc
+ xsession       > .xsessionrc starts urxvtd and xmonad, xmonad starts polybar, .xserverrc
 
  not in use on this machine (mostly inherited from xero)
  -------------------------------------------------------

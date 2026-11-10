@@ -8,7 +8,9 @@ import System.Exit
 import XMonad
 import XMonad.Hooks.ManageDocks(ToggleStruts(..),avoidStruts,docks,manageDocks)
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.Rescreen(addAfterRescreenHook)
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.StatusBar(killAllStatusBars,spawnStatusBar)
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spiral
@@ -334,12 +336,28 @@ myStartupHook = return ()
 
 
 ------------------------------------------------------------------------
+-- Status bars
+-- One polybar per screen, restarted whenever the screens change. polybar-screen
+-- maps the screen number to an xrandr output.
+--
+-- XMonad.Hooks.StatusBar's dynamicSBs doesn't fit here: it keeps bars by screen
+-- number, but numbers move between outputs (switch off LVDS1 and the external
+-- monitor becomes screen 0), which leaves a surviving bar on the wrong output.
+--
+startBars :: X ()
+startBars = do
+  killAllStatusBars
+  screens <- gets (W.screens . windowset)
+  mapM_ (spawnStatusBar . barCommand . W.screen) screens
+  where barCommand (S n) = "$HOME/.xmonad/bin/polybar-screen " ++ show n
+
+------------------------------------------------------------------------
 -- Run xmonad with all the defaults we set up.
 --
 main = do
-  xmonad $ docks defaults {
+  xmonad $ addAfterRescreenHook startBars $ docks defaults {
     manageHook = manageDocks <+> myManageHook
-    , startupHook = setWMName "LG3D"
+    , startupHook = setWMName "LG3D" >> startBars
 }
 ------------------------------------------------------------------------
 -- Combine it all together

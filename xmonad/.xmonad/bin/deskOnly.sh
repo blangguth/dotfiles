@@ -1,2 +1,7 @@
 #!/bin/sh
-xrandr --output VGA-1 --off --output LVDS-1 --off --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --mode 2560x1440 --pos 0x0 --rotate normal --output DP-1 --off
+# External monitor only, which is DP2 or DP3 depending on the port.
+external=$(xrandr --query | awk '/^(DP|HDMI)[0-9]+ connected/ { print $1; exit }')
+[ -n "$external" ] || { echo "no external monitor connected" >&2; exit 1; }
+others=$(xrandr --query | awk -v keep="$external" '/^(VGA|DP|HDMI)[0-9]/ && $1 != keep { printf "--output %s --off ", $1 }')
+
+xrandr $others --output LVDS1 --off --output "$external" --mode 2560x1440 --pos 0x0 --rotate normal
