@@ -21,8 +21,6 @@ urxvt*font: xft:SauceCodePro Nerd Font Mono:style=Medium:size=11.5,xft:DejaVu Sa
 urxvt*depth: 32
 urxvt*loginShell: true
 urxvt*saveLines: 4095
-urxvt*transparent: true
-URxvt*shading: 20
 
 ! links
 urxvt.perl-ext-common: default,matcher
