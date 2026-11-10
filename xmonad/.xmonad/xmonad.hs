@@ -6,7 +6,7 @@
 
 import System.Exit
 import XMonad
-import XMonad.Hooks.EwmhDesktops(ewmh)
+import XMonad.Hooks.EwmhDesktops(disableEwmhManageDesktopViewport,ewmh)
 import XMonad.Hooks.ManageDocks(ToggleStruts(..),avoidStruts,docks,manageDocks)
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.Rescreen(addAfterRescreenHook)
@@ -356,7 +356,9 @@ startBars = do
 -- Run xmonad with all the defaults we set up.
 --
 main = do
-  xmonad $ ewmh $ addAfterRescreenHook startBars $ docks defaults {
+  -- no _NET_DESKTOP_VIEWPORT: polybar would group the workspaces by monitor
+  -- and list them out of order (2 3 ... 9 1)
+  xmonad $ disableEwmhManageDesktopViewport $ ewmh $ addAfterRescreenHook startBars $ docks defaults {
     manageHook = manageDocks <+> myManageHook
     , startupHook = setWMName "LG3D" >> startBars
 }
